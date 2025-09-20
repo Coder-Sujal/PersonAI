@@ -7,7 +7,7 @@ import Searchbar from "@/components/Searchbar";
 
 import { MenuIcon } from "lucide-react";
 
-import { motion, scale } from "motion/react";
+import { motion } from "motion/react";
 
 function HomeScreen() {
   const [message, setMessage] = useState<string>();
@@ -26,18 +26,26 @@ function HomeScreen() {
       <div className="h-screen w-screen bg-[#F9FCFE] poppins-regular p-6 flex flex-col justify-between">
         <div className="flex justify-between items-center">
           <motion.div
+            className="rounded-md px-1 py-1 group"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              duration: 0.4,
-              scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+            whileHover={{
+              scale: 1.08,
+              rotate: 1,
+              boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
+              backgroundColor: "#1C1F2E",
             }}
-            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 15,
+            }}
           >
             <MenuIcon
-              width={30}
-              height={30}
-              className="cursor-pointer md:hidden"
+              width={25}
+              height={25}
+              className="cursor-pointer md:hidden group-hover:text-[#FFFFFF] transition-all"
               onClick={() => setIsSidebarOpen(true)}
             />
           </motion.div>
