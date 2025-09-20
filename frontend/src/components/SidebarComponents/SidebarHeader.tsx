@@ -5,11 +5,15 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 interface ButtonProps {
   label: string;
   Icon: LucideIcon;
+}
+
+interface SidebarHeaderProps {
+  isExpanded: boolean;
 }
 
 const Buttons: ButtonProps[] = [
@@ -27,14 +31,16 @@ const Buttons: ButtonProps[] = [
   },
 ];
 // hover:bg-[#6B7EFC]/10 hover:text-[#6B7EFC]
-const SidebarHeader = () => {
+const SidebarHeader = ({ isExpanded }: SidebarHeaderProps) => {
   return (
     <div className="w-full flex flex-col items-start my-2">
       {Buttons.map(({ label, Icon }, ind) => {
         return (
           <motion.button
             key={ind}
-            className="w-full flex items-center justify-start gap-3 text-white rounded-lg px-3 py-2 cursor-pointer"
+            className={`w-full flex items-center justify-start gap-3 text-white rounded-lg px-3 py-2 cursor-pointer group ${
+              !isExpanded && "md:justify-center"
+            }`}
             whileHover="hover"
             whileTap={{ scale: 0.95 }}
             variants={{
@@ -44,17 +50,18 @@ const SidebarHeader = () => {
               },
             }}
           >
-            {/* {TODO :- CHANGE THE SIZE OF THIS ICON} */}
             <motion.span
               variants={{
                 hover: { scale: 1.2 }, // move + rotate icon
               }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
             >
-              <Icon size={18} />
+              <Icon size={isExpanded ? 18 : 20} />
             </motion.span>
             <motion.span
-              className="truncate poppins-regular"
+              className={`truncate poppins-regular ${
+                isExpanded ? "md:inline" : "md:hidden"
+              }`}
               variants={{
                 hover: { x: 4 }, // shift text a bit on hover
               }}
@@ -62,6 +69,20 @@ const SidebarHeader = () => {
             >
               {label}
             </motion.span>
+            {!isExpanded && (
+              <AnimatePresence>
+                <motion.span
+                  initial={{ scale: 0 }}
+                  variants={{
+                    hover: { scale: 1 }, // shift text a bit on hover
+                  }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="hidden text-sm text-nowrap px-2 py-2 absolute translate-x-2 md:group-hover:block left-full text-[#1C1F2E] bg-white rounded-sm z-10 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+                >
+                  {label}
+                </motion.span>
+              </AnimatePresence>
+            )}
           </motion.button>
         );
       })}

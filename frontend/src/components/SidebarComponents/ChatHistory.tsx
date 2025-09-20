@@ -1,9 +1,13 @@
 import { MessageCircleX } from "lucide-react";
 import { motion } from "motion/react";
 
-const ChatHistory = () => {
+interface ChatHistoryProps {
+  isExpanded: boolean;
+}
+
+const ChatHistory = ({ isExpanded }: ChatHistoryProps) => {
   return (
-    <div className="flex-1 h-full overflow-y-auto">
+    <div className={`flex-1 h-full overflow-y-auto ${!isExpanded && "md:hidden"}`}>
       <div className="flex flex-col gap-1 scroll-smooth">
         {Array.from({ length: 30 }).map((_, i) => (
           <motion.button

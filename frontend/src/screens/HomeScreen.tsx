@@ -23,60 +23,62 @@ function HomeScreen() {
 
   return (
     <div className="relative poppins-regular">
-      <div className="h-screen w-screen bg-[#F9FCFE] poppins-regular p-6 flex flex-col justify-between">
-        <div className="flex justify-between items-center">
-          <motion.div
-            className="rounded-md px-1 py-1 group"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            whileHover={{
-              scale: 1.08,
-              rotate: 1,
-              boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
-              backgroundColor: "#1C1F2E",
-            }}
-            whileTap={{ scale: 0.95 }}
-            transition={{
-              type: "spring",
-              stiffness: 300,
-              damping: 15,
-            }}
-          >
-            <MenuIcon
-              width={25}
-              height={25}
-              className="cursor-pointer md:hidden group-hover:text-[#FFFFFF] transition-all"
-              onClick={() => setIsSidebarOpen(true)}
+      <div className="h-screen w-screen bg-[#F9FCFE] poppins-regular flex items-center gap-1">
+        <Sidebar
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        />
+        <div className="h-full w-full py-3 px-4 flex flex-col justify-between">
+          <div className="flex justify-between items-center">
+            <motion.div
+              className="rounded-md px-1 py-1 group"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{
+                scale: 1.08,
+                rotate: 1,
+                boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
+                backgroundColor: "#1C1F2E",
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 15,
+              }}
+            >
+              <MenuIcon
+                width={25}
+                height={25}
+                className="cursor-pointer md:hidden group-hover:text-[#FFFFFF] transition-all"
+                onClick={() => setIsSidebarOpen(true)}
+              />
+            </motion.div>
+            <Searchbar />
+          </div>
+          <form className="relative bottom-0">
+            <img
+              src="./ai.png"
+              alt="ai logo"
+              width={20}
+              height={20}
+              className={`absolute top-3 left-3 ${message ? "hidden" : ""}`}
             />
-          </motion.div>
-          <Searchbar />
+            <Textarea
+              value={message}
+              onChange={(event) => handleOnChange(event)}
+              className="border-none shadow-[1px_4px_37px_11px_rgba(151,165,255,0.25)] w-full min-h-28 max-h-32 resize-none placeholder:text-black/40 placeholder:px-10 placeholder:py-1 focus-visible:ring-0 focus-visible:ring-offset-0 focus:shadow-[0px_0px_0px_5px_rgba(151,165,255,0.9)] transition-all ease-in duration-200"
+              placeholder="Initiate conversation with AI."
+            />
+            <Button
+              type="submit"
+              className="m-0 p-0 border-none absolute bottom-3 right-5 cursor-pointer bg-transparent hover:bg-transparent"
+            >
+              <img src="./send.png" alt="send icon" width={25} height={25} />
+            </Button>
+          </form>
         </div>
-        <form className="relative bottom-0">
-          <img
-            src="./ai.png"
-            alt="ai logo"
-            width={20}
-            height={20}
-            className={`absolute top-3 left-3 ${message ? "hidden" : ""}`}
-          />
-          <Textarea
-            value={message}
-            onChange={(event) => handleOnChange(event)}
-            className="border-none shadow-[1px_4px_37px_11px_rgba(151,165,255,0.25)] w-full min-h-28 max-h-32 resize-none placeholder:text-black/40 placeholder:px-10 placeholder:py-1 focus-visible:ring-0 focus-visible:ring-offset-0 focus:shadow-[0px_0px_0px_5px_rgba(151,165,255,0.9)] transition-all ease-in duration-200"
-            placeholder="Initiate conversation with AI."
-          />
-          <Button
-            type="submit"
-            className="m-0 p-0 border-none absolute bottom-3 right-5 cursor-pointer bg-transparent hover:bg-transparent"
-          >
-            <img src="./send.png" alt="send icon" width={25} height={25} />
-          </Button>
-        </form>
       </div>
-      <Sidebar
-        isSidebarOpen={isSidebarOpen}
-        setIsSidebarOpen={setIsSidebarOpen}
-      />
     </div>
   );
 }
