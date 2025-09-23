@@ -8,6 +8,7 @@ import Searchbar from "@/components/Searchbar";
 import { MenuIcon } from "lucide-react";
 
 import { motion } from "motion/react";
+import Welcome from "@/components/Welcome";
 
 function HomeScreen() {
   const [message, setMessage] = useState<string>();
@@ -28,7 +29,7 @@ function HomeScreen() {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        <div className="h-full w-full py-3 px-4 flex flex-col justify-between">
+        <div className="h-full w-full py-3 px-4 flex flex-col justify-between gap-3">
           <div className="flex justify-between items-center">
             <motion.div
               className="rounded-md px-1 py-1 group"
@@ -56,6 +57,7 @@ function HomeScreen() {
             </motion.div>
             <Searchbar />
           </div>
+          <Welcome />
           <form className="relative bottom-0">
             <img
               src="./ai.png"
