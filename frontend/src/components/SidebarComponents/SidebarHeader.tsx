@@ -7,6 +7,7 @@ import {
 
 import MajorButton from "../Buttons/MajorButton.tsx";
 import AddPersonaForm, { type DialogProps } from "../Forms/AddPersonaForm.tsx";
+import DeletePersonaDialog from "../Forms/DeletePersonaDialog.tsx";
 
 interface ButtonProps {
   label: string;
@@ -28,7 +29,7 @@ const Buttons: ButtonProps[] = [
   {
     label: "Remove Persona",
     Icon: UserRoundMinus,
-    DialogBox: AddPersonaForm,
+    DialogBox: DeletePersonaDialog,
   },
 ];
 // hover:bg-[#6B7EFC]/10 hover:text-[#6B7EFC]

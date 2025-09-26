@@ -6,13 +6,12 @@ import { useContext, useState } from "react";
 import type { DialogProps } from "../Forms/AddPersonaForm.tsx";
 
 interface MajorButtonProps {
-  key: number;
   label: string;
   Icon: LucideIcon;
   DialogBox: React.FunctionComponent<DialogProps> | null;
 }
 
-const MajorButton = ({ key, label, Icon, DialogBox }: MajorButtonProps) => {
+const MajorButton = ({label, Icon, DialogBox }: MajorButtonProps) => {
   const isExpanded = useContext(SidebarExpandedContext);
   const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false)
 
@@ -27,7 +26,6 @@ const MajorButton = ({ key, label, Icon, DialogBox }: MajorButtonProps) => {
   return (
     <>
       <motion.button
-        key={key}
         className={`w-full flex items-center justify-start gap-3 text-white rounded-lg px-3 py-2 cursor-pointer group ${
           !isExpanded && "md:justify-center"
         }`}
